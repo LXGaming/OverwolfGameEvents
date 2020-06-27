@@ -17,8 +17,10 @@
 package io.github.lxgaming.overwolf.internal.structure;
 
 import com.sun.jna.Structure;
+import io.github.lxgaming.overwolf.internal.util.Toolbox;
 
-@Structure.FieldOrder({"name", "data"})
+import java.util.List;
+
 public class EventStructure extends Structure {
     
     public static final int MAX_NAME_LENGTH = 255;
@@ -35,5 +37,10 @@ public class EventStructure extends Structure {
         super();
         this.name = name;
         this.data = data;
+    }
+    
+    @Override
+    protected List<String> getFieldOrder() {
+        return Toolbox.newArrayList("name", "data");
     }
 }

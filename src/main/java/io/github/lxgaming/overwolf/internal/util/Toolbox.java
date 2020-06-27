@@ -21,6 +21,9 @@ import com.sun.jna.Native;
 import com.sun.jna.Structure;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Toolbox {
     
@@ -80,5 +83,10 @@ public class Toolbox {
         }
         
         return type.getSimpleName();
+    }
+    
+    @SafeVarargs
+    public static <E> ArrayList<E> newArrayList(E... elements) {
+        return Stream.of(elements).collect(Collectors.toCollection(ArrayList::new));
     }
 }

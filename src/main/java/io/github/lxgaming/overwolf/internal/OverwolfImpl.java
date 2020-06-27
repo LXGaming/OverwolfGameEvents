@@ -44,30 +44,27 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class OverwolfImpl implements Overwolf {
     
-    protected static final GameEvents GAME_EVENTS;
+    protected static final GameEvents GAME_EVENTS = loadGameEvents();
     protected final long gameId;
     protected final PointerByReference handle;
     protected final List<CategoryImpl> categories;
     protected final AtomicBoolean transaction = new AtomicBoolean(false);
     
-    static {
-        GameEvents gameEvents;
-        
-        try {
-            Map<String, Object> options = new HashMap<>();
-            options.put(Library.OPTION_FUNCTION_MAPPER, new FunctionMapperImpl());
-            gameEvents = Native.load("libowgameevents", GameEvents.class, options);
-        } catch (Throwable throwable) {
-            gameEvents = null;
-        }
-        
-        GAME_EVENTS = gameEvents;
-    }
-    
     public OverwolfImpl(long gameId) {
         this.gameId = gameId;
         this.handle = new PointerByReference();
         this.categories = new ArrayList<>();
+    }
+    
+    @SuppressWarnings("deprecation")
+    protected static GameEvents loadGameEvents() {
+        try {
+            Map<String, Object> options = new HashMap<>();
+            options.put(Library.OPTION_FUNCTION_MAPPER, new FunctionMapperImpl());
+            return Native.loadLibrary("libowgameevents", GameEvents.class, options);
+        } catch (Throwable throwable) {
+            return null;
+        }
     }
     
     public void register(@NonNull Category... categories) {

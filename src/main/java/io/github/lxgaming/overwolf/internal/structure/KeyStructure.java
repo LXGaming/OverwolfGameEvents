@@ -18,9 +18,11 @@ package io.github.lxgaming.overwolf.internal.structure;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.Structure;
+import io.github.lxgaming.overwolf.internal.util.Toolbox;
 import io.github.lxgaming.overwolf.internal.util.UnsignedInteger;
 
-@Structure.FieldOrder({"key", "size"})
+import java.util.List;
+
 public class KeyStructure extends Structure {
     
     public Pointer key;
@@ -34,6 +36,11 @@ public class KeyStructure extends Structure {
         super();
         this.key = key;
         this.size = size;
+    }
+    
+    @Override
+    protected List<String> getFieldOrder() {
+        return Toolbox.newArrayList("key", "size");
     }
     
     public static class ByReference extends KeyStructure implements Structure.ByReference {

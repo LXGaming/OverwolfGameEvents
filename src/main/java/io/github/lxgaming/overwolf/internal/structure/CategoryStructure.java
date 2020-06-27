@@ -18,9 +18,11 @@ package io.github.lxgaming.overwolf.internal.structure;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.Structure;
+import io.github.lxgaming.overwolf.internal.util.Toolbox;
 import io.github.lxgaming.overwolf.internal.util.UnsignedInteger;
 
-@Structure.FieldOrder({"name", "items", "keys"})
+import java.util.List;
+
 public class CategoryStructure extends Structure {
     
     public Pointer name;
@@ -36,5 +38,10 @@ public class CategoryStructure extends Structure {
         this.name = name;
         this.items = items;
         this.keys = keys;
+    }
+    
+    @Override
+    protected List<String> getFieldOrder() {
+        return Toolbox.newArrayList("name", "items", "keys");
     }
 }
