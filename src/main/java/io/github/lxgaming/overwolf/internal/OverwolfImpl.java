@@ -63,6 +63,7 @@ public class OverwolfImpl implements Overwolf {
             options.put(Library.OPTION_FUNCTION_MAPPER, new FunctionMapperImpl());
             return Native.loadLibrary("libowgameevents", GameEvents.class, options);
         } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }
