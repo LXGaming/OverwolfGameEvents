@@ -1,0 +1,91 @@
+plugins {
+    id "com.jfrog.bintray" version "1.8.5"
+    id "java"
+    id "java-library"
+    id "maven-publish"
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+group = "io.github.lxgaming"
+archivesBaseName = "OverwolfGameEvents"
+version = "1.0.0"
+
+configurations {
+    provided {
+        compile.extendsFrom(provided)
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    api("net.java.dev.jna:jna:5.5.0")
+    api("org.checkerframework:checker-qual:3.4.1")
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier.set("javadoc")
+    from javadoc.destinationDir
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    archiveClassifier.set("sources")
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+bintray {
+    user = System.getenv("BINTRAY_USER")
+    key = System.getenv("BINTRAY_KEY")
+    publications = ["mavenPublication"]
+    pkg {
+        repo = "maven"
+        name = "OverwolfGameEvents"
+        userOrg = "LXGaming"
+        licenses = ["Apache-2.0"]
+        vcsUrl = "https://github.com/LXGaming/OverwolfGameEvents.git"
+        publish = true
+        version {
+            name = project.version
+            released = new Date()
+        }
+    }
+}
+
+bintrayUpload {
+    onlyIf { System.getenv("BINTRAY_KEY") != null }
+    onlyIf { System.getenv("BINTRAY_USER") != null }
+    onlyIf { System.getenv("TRAVIS_BUILD_NUMBER") != null }
+    onlyIf { System.getenv("TRAVIS_JOB_NUMBER") ==~ /\d+\.1$/ }
+    onlyIf { System.getenv("TRAVIS_PULL_REQUEST") == "false" }
+}
+
+javadoc {
+    failOnError = false
+}
+
+processResources {
+    from("LICENSE")
+    rename("LICENSE", "LICENSE-${archivesBaseName}")
+}
+
+publishing {
+    publications {
+        mavenPublication(MavenPublication) {
+            from components.java
+            groupId group
+            artifactId archivesBaseName
+            version version
+            artifact javadocJar
+            artifact sourcesJar
+        }
+    }
+}
