@@ -7,6 +7,11 @@
 - `src/main/resources/win32-x86/libowgameevents.dll` from [libowgameevents.dll](https://github.com/overwolf/game-events-sdk/blob/master/libowgameevents/lib/Release/Win32/libowgameevents.dll)
 - `src/main/resources/win32-x86-64/libowgameevents.dll` from [libowgameevents.dll](https://github.com/overwolf/game-events-sdk/blob/master/libowgameevents/lib/Release/x64/libowgameevents.dll)
 
+### API
+Repository: `https://dl.bintray.com/lxgaming/maven`
+<br>
+Dependency: `io.github.lxgaming:overwolfgameevents:1.0.0`
+
 ## Usage
 ```java
 // Create a key.
