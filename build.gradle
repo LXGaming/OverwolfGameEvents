@@ -9,7 +9,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 group = "io.github.lxgaming"
-archivesBaseName = "OverwolfGameEvents"
+archivesBaseName = "overwolfgameevents"
 version = "1.0.0"
 
 configurations {
