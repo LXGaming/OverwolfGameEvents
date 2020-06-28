@@ -49,7 +49,6 @@ bintray {
     pkg {
         repo = "maven"
         name = "OverwolfGameEvents"
-        userOrg = "LXGaming"
         licenses = ["Apache-2.0"]
         vcsUrl = "https://github.com/LXGaming/OverwolfGameEvents.git"
         publish = true
