@@ -27,7 +27,7 @@ dependencies {
 }
 
 indra {
-    github("LXGaming", "Common")
+    github("LXGaming", "OverwolfGameEvents")
     apache2License()
 }
 
