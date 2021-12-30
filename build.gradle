@@ -66,8 +66,8 @@ publishing {
                     }
                 }
                 scm {
-                    connection = "scm:git@github.com:LXGaming/OverwolfGameEvents.git"
-                    developerConnection = "scm:git@github.com:LXGaming/OverwolfGameEvents.git"
+                    connection = "scm:git:https://github.com/LXGaming/OverwolfGameEvents.git"
+                    developerConnection = "scm:git:https://github.com/LXGaming/OverwolfGameEvents.git"
                     url = "https://github.com/LXGaming/OverwolfGameEvents"
                 }
             }
